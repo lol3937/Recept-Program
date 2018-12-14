@@ -9,18 +9,21 @@ namespace Recept
 {
     class Program
     {
-        static List<Receptclass> Steve;
+        static List<Receptclass> receptLista;
+        List<List>(string) SaveRecept;
 
         static void Main(string[] args)
         {
-            Steve = new List<Receptclass>();
+            receptLista = new List<Receptclass>();
 
-            Steve.Add(new Receptclass("joel", new List<string>(), new List<Ingredienser>()));
+            receptLista.Add(new Receptclass("joel", new List<string>(), new List<Ingredienser>()));
+
+            SkrivaRecept();
         }
 
-        public string LäsaRecept()
+        public static string LäsaRecept()
         {
-            foreach(Receptclass i in Steve) { }
+            foreach(Receptclass i in receptLista) { }
 
 
             //Skapar en readline
@@ -45,7 +48,7 @@ namespace Recept
         }
 
 
-        public Receptclass SkrivaRecept()
+        public static Receptclass SkrivaRecept()//med static så kan jag använda metoden
         {
             int mått;
             string vara;
@@ -58,27 +61,34 @@ namespace Recept
 
             List<Ingredienser> Ingredienslista = new List<Ingredienser>();
 
-            Console.WriteLine("Skriv receptnamnet");
-            namn = Console.ReadLine();
+            while(true){
+                Console.WriteLine("Skriv receptnamnet");
+                namn = Console.ReadLine();
 
-            Console.WriteLine("Skriv in mått");
-            mått = int.Parse(Console.ReadLine());
+                Console.WriteLine("Skriv in antal mått");
+                mått = int.Parse(Console.ReadLine());
+                Console.WriteLine("Skriv in måttenhet");
+                måttenhet = Console.ReadLine();
+                Console.WriteLine("Vill du skriva mer?");
 
-            string StopMått = "no";//När mått inte ska skrivas ut mera
+                string stopMått;
 
-            if (Console.ReadLine(StopMått) == "no")
-            {
-                
+                stopMått = Console.ReadLine();
+
+                if (stopMått == "no")
+                {
+                    break;
+                }
             }
-            
-
-            Console.WriteLine("Skriv in måttenhet");
-            måttenhet = Console.ReadLine();
 
             while (true)//Skapar en loop, om man är nöjd med sitt mått så fortsätter inte loopen
             {
                 Console.WriteLine("vill du ändra måttenhet?");
-                if(Console.ReadLine() == "Nej")
+
+                string stoppme;
+
+                stoppme = Console.ReadLine();
+                if(stoppme == "Nej")
                 {
                     break;
                 }
